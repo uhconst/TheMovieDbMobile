@@ -51,6 +51,9 @@ public class Movie {
     @ColumnInfo(name = DataMovieName.COL_VOTE_AVERAGE)
     private double vote_average;
 
+    @ColumnInfo(name = DataMovieName.COL_FAVORITE)
+    private boolean favorite;
+
     public int getId() {
         return id;
     }
@@ -153,5 +156,13 @@ public class Movie {
 
     public void setVote_average(double vote_average) {
         this.vote_average = vote_average;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

@@ -44,6 +44,7 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
         private ImageView mImage;
         private TextView mTitle;
         private TextView mPopularity;
+        private TextView mFavorite;
         private Movie mMovie;
 
         MovieViewHolder(View itemView) {
@@ -52,6 +53,7 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
             mImage = itemView.findViewById(R.id.adapter_movie_image);
             mTitle = itemView.findViewById(R.id.adapter_movie_title);
             mPopularity = itemView.findViewById(R.id.adapter_movie_popularity);
+            mFavorite = itemView.findViewById(R.id.adapter_movie_favorite);
         }
 
         public Movie getMovie() {
@@ -69,6 +71,7 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
             String title = movie.getTitle().length() > 30 ? (movie.getTitle().substring(0, 30) + "...") : movie.getTitle();
             mTitle.setText(title);
             mPopularity.setText(String.valueOf(movie.getPopularity()));
+            mFavorite.setText(movie.isFavorite() ? "S" : "N"); // todo use a star icon
         }
     }
 

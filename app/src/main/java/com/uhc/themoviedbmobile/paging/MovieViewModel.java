@@ -71,4 +71,8 @@ public class MovieViewModel extends ViewModel {
             }
         });
     }
+
+    public void updateMovieFavorite(int id, boolean favorite) {
+        mRepository.updateMovieFavorite(id, favorite);
+    }
 }

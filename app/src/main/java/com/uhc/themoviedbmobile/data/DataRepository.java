@@ -44,4 +44,7 @@ public class DataRepository {
         mIoExecutor.execute(() -> mDao.insertAll(movie));
     }
 
+    public void updateMovieFavorite(int id, boolean favorite) {
+        mIoExecutor.execute(() -> mDao.update(id, favorite));
+    }
 }

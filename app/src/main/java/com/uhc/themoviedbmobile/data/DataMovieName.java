@@ -18,4 +18,5 @@ final class DataMovieName {
     static final String COL_VOTE_COUNT = "vote_count";
     static final String COL_VIDEO = "video";
     static final String COL_VOTE_AVERAGE = "vote_average";
+    static final String COL_FAVORITE = "favorite";
 }

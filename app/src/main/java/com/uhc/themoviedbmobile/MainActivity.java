@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import com.facebook.stetho.Stetho;
 import com.uhc.themoviedbmobile.data.Movie;
 import com.uhc.themoviedbmobile.paging.MovieAdapter;
 import com.uhc.themoviedbmobile.paging.MovieViewModel;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ViewModelFactory viewModelFactory = ViewModelFactory.createFactory(this);
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieViewModel.class);
+
+        if (BuildConfig.DEVELOPMENT)
+            Stetho.initializeWithDefaults(this);
 
         setContentView(R.layout.activity_main);
 

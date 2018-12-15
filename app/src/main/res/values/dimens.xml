@@ -2,6 +2,9 @@
 <resources>
     <!-- Margin -->
     <dimen name="margin_default">10dp</dimen>
+    <dimen name="margin_large">14dp</dimen>
+    <dimen name="margin_xlarge">18dp</dimen>
+    <dimen name="margin_xxlarge">22dp</dimen>
 
     <!-- Size List Item Image -->
     <dimen name="imv_list_item_size">50dp</dimen>

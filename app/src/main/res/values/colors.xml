@@ -4,5 +4,10 @@
     <color name="colorPrimaryDark">#0b181b</color>
     <color name="colorAccent">#1ec65f</color>
 
+    <!-- Texts -->
     <color name="cinza_text">#868686</color>
+
+    <!-- Favorite Star -->
+    <color name="favorite_star_color">#dcc91b</color>
+
 </resources>

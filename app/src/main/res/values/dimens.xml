@@ -19,4 +19,6 @@
     <dimen name="font_size_xlarge">18sp</dimen>
     <dimen name="font_size_xxlarge">22sp</dimen>
 
+    <!-- Size Deatails Poster Image -->
+    <dimen name="imv_details_favorite_star">30dp</dimen>
 </resources>

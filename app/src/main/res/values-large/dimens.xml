@@ -5,4 +5,7 @@
 
     <!-- Size Deatails Poster Image -->
     <dimen name="imv_details_poster_size">300dp</dimen>
+
+    <!-- Size Deatails Poster Image -->
+    <dimen name="imv_details_favorite_star">45dp</dimen>
 </resources>

@@ -45,4 +45,7 @@ public class MovieDetailsViewModel extends ViewModel {
         return mMovie;
     }
 
+    public void updateMovieFavorite(int id, boolean favorite) {
+        mRepository.updateMovieFavorite(id, favorite);
+    }
 }

@@ -48,4 +48,11 @@ public class APIClient {
 
         return builder.build().create(MovieAPI.class);
     }
+
+    public static String getFullPosterPath(String path) {
+        if (path != null)
+            return APIClient.TMDM_IMAGE_URL + path;
+
+        return "";
+    }
 }

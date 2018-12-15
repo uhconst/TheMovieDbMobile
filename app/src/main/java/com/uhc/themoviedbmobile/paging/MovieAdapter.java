@@ -1,6 +1,8 @@
 package com.uhc.themoviedbmobile.paging;
 
 import android.arch.paging.PagedListAdapter;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.uhc.themoviedbmobile.R;
+import com.uhc.themoviedbmobile.activities.MovieDetailsActivity;
 import com.uhc.themoviedbmobile.api.APIClient;
 import com.uhc.themoviedbmobile.data.Movie;
 
@@ -20,14 +23,17 @@ import com.uhc.themoviedbmobile.data.Movie;
  */
 public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieViewHolder> {
 
-    public MovieAdapter() {
+    private Context ctx;
+
+    public MovieAdapter(Context ctx) {
         super(DIFF_CALLBACK);
+        this.ctx = ctx;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_movie, parent, false);
+        View itemView = LayoutInflater.from(ctx).inflate(R.layout.adapter_movie, parent, false);
         return new MovieViewHolder(itemView);
     }
 
@@ -63,15 +69,19 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
         void bindTo(Movie movie) {
             mMovie = movie;
 
-            if (movie.getPoster_path() != null) {
-                String poster = APIClient.TMDM_IMAGE_URL + movie.getPoster_path();
-                Picasso.get().load(poster).into(mImage);
-            }
+            String poster = APIClient.getFullPosterPath(movie.getPoster_path());
+            Picasso.get().load(poster).into(mImage);
 
             String title = movie.getTitle().length() > 30 ? (movie.getTitle().substring(0, 30) + "...") : movie.getTitle();
             mTitle.setText(title);
             mPopularity.setText(String.valueOf(movie.getPopularity()));
             mFavorite.setText(movie.isFavorite() ? "S" : "N"); // todo use a star icon
+
+            mImage.setOnClickListener(view -> {
+                Intent intent = new Intent(ctx, MovieDetailsActivity.class);
+                intent.putExtra("id",movie.getId());
+                ctx.startActivity(intent);
+            });
         }
     }
 

@@ -10,6 +10,9 @@ import android.support.annotation.NonNull;
  */
 @Entity(tableName = DataMovieName.TABLE_NAME)
 public class Movie {
+    public static final String IsAdult = "Yes";
+    public static final String IsNotAdult = "No";
+
     @PrimaryKey
     @ColumnInfo(name = DataMovieName.COL_ID)
     @NonNull

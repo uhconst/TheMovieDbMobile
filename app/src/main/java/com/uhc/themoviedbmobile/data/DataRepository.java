@@ -1,9 +1,11 @@
 package com.uhc.themoviedbmobile.data;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.arch.paging.DataSource;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -38,6 +40,15 @@ public class DataRepository {
             return mDao.getAllLimited(limit);
 
         return mDao.getAll();
+    }
+
+    public LiveData<Movie> getMovie(int id) {
+        try {
+            return mIoExecutor.submit(() -> mDao.getMovieById(id)).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void insert(Movie movie) {

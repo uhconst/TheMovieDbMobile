@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextViewLabelMovieDetails">
+        <item name="android:textColor">@color/cinza_text</item>
+        <item name="android:layout_marginBottom">@dimen/margin_default</item>
+    </style>
+
+    <style name="TextViewValueMovieDetails">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/margin_default</item>
+    </style>
+
 </resources>

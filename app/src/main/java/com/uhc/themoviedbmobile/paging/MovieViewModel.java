@@ -23,6 +23,7 @@ import retrofit2.Response;
 public class MovieViewModel extends ViewModel {
 
     private final static int PAGE_SIZE = 20;
+    private final static int TOTAL_MOVIES = 50;
     private final static int TOTAL_PAGES = 3;
     private final static boolean PLACEHOLDERS = true;
     private final DataRepository mRepository;
@@ -36,7 +37,7 @@ public class MovieViewModel extends ViewModel {
     @SuppressWarnings("unchecked")
     public LiveData<PagedList<Movie>> getAllMovies() {
         getAllMoviesOnline();
-        return new LivePagedListBuilder<>(mRepository.getMovies(), new PagedList.Config.Builder()
+        return new LivePagedListBuilder<>(mRepository.getMovies(TOTAL_MOVIES), new PagedList.Config.Builder()
                 .setPageSize(PAGE_SIZE)
                 .setEnablePlaceholders(PLACEHOLDERS)
                 .build()).build();

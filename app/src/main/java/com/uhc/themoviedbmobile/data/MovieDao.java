@@ -20,6 +20,12 @@ public interface MovieDao {
     @Query("SELECT * FROM " + DataMovieName.TABLE_NAME + " ORDER BY " + DataMovieName.COL_POPULARITY + " DESC")
     DataSource.Factory<Integer, Movie> getAll();
 
+    /**
+     * Returns all data with limit in table for Paging.
+     * @param limit Limit movies number to be returned
+     */
+    @Query("SELECT * FROM " + DataMovieName.TABLE_NAME + " ORDER BY " + DataMovieName.COL_POPULARITY + " DESC LIMIT :limit")
+    DataSource.Factory<Integer, Movie> getAllLimited(int limit);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(ArrayList<Movie> movie);

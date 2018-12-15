@@ -33,7 +33,10 @@ public class DataRepository {
         mDao = dao;
     }
 
-    public DataSource.Factory<Integer, Movie> getMovies() {
+    public DataSource.Factory<Integer, Movie> getMovies(int limit) {
+        if (limit > 0)
+            return mDao.getAllLimited(limit);
+
         return mDao.getAll();
     }
 

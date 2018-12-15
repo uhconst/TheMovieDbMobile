@@ -2,21 +2,18 @@ package com.uhc.themoviedbmobile.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.facebook.stetho.Stetho;
-import com.uhc.themoviedbmobile.BuildConfig;
 import com.uhc.themoviedbmobile.R;
 import com.uhc.themoviedbmobile.data.Movie;
 import com.uhc.themoviedbmobile.paging.MovieAdapter;
 import com.uhc.themoviedbmobile.paging.MovieViewModel;
 import com.uhc.themoviedbmobile.paging.ViewModelFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends TMDMActivity {
     private RecyclerView mRecycler;
     private MovieViewModel mViewModel;
 
@@ -26,12 +23,9 @@ public class MainActivity extends AppCompatActivity {
         ViewModelFactory viewModelFactory = ViewModelFactory.createFactory(this);
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieViewModel.class);
 
-        if (BuildConfig.DEVELOPMENT)
-            Stetho.initializeWithDefaults(this);
-
         setContentView(R.layout.activity_main);
 
-        MovieAdapter adapter = new MovieAdapter();
+        MovieAdapter adapter = new MovieAdapter(this);
         mViewModel.getAllMovies().observe(this, adapter::submitList);
 
         mRecycler = findViewById(R.id.rv_movies);

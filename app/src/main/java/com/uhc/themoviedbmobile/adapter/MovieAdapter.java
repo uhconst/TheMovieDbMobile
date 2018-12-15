@@ -1,4 +1,4 @@
-package com.uhc.themoviedbmobile.paging;
+package com.uhc.themoviedbmobile.adapter;
 
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
@@ -14,14 +14,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.uhc.themoviedbmobile.R;
-import com.uhc.themoviedbmobile.activities.MovieDetailsActivity;
+import com.uhc.themoviedbmobile.activity.MovieDetailsActivity;
 import com.uhc.themoviedbmobile.api.APIClient;
-import com.uhc.themoviedbmobile.data.Movie;
+import com.uhc.themoviedbmobile.model.MovieModel;
 
 /**
  * Created by const on 12/12/18.
  */
-public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieViewHolder> {
+public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.MovieViewHolder> {
 
     private Context ctx;
 
@@ -39,7 +39,7 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        Movie item = getItem(position);
+        MovieModel item = getItem(position);
 
         if (item != null) {
             holder.bindTo(item);
@@ -51,7 +51,7 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
         private TextView mTitle;
         private TextView mPopularity;
         private TextView mFavorite;
-        private Movie mMovie;
+        private MovieModel mMovie;
 
         MovieViewHolder(View itemView) {
             super(itemView);
@@ -62,11 +62,11 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
             mFavorite = itemView.findViewById(R.id.adapter_movie_favorite);
         }
 
-        public Movie getMovie() {
+        public MovieModel getMovie() {
             return mMovie;
         }
 
-        void bindTo(Movie movie) {
+        void bindTo(MovieModel movie) {
             mMovie = movie;
 
             String poster = APIClient.getFullPosterPath(movie.getPoster_path());
@@ -85,16 +85,16 @@ public class MovieAdapter extends PagedListAdapter<Movie, MovieAdapter.MovieView
         }
     }
 
-    private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<Movie>() {
+    private static final DiffUtil.ItemCallback<MovieModel> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<MovieModel>() {
                 @Override
-                public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
+                public boolean areItemsTheSame(@NonNull MovieModel oldItem, @NonNull MovieModel newItem) {
                     return oldItem.getId() == newItem.getId();
                 }
 
                 @Override
-                public boolean areContentsTheSame(@NonNull Movie oldItem,
-                                                  @NonNull Movie newItem) {
+                public boolean areContentsTheSame(@NonNull MovieModel oldItem,
+                                                  @NonNull MovieModel newItem) {
                     return oldItem == newItem;
                 }
             };

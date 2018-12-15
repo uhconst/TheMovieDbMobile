@@ -1,4 +1,4 @@
-package com.uhc.themoviedbmobile.activities;
+package com.uhc.themoviedbmobile.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

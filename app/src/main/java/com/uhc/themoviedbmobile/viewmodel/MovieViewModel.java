@@ -1,4 +1,4 @@
-package com.uhc.themoviedbmobile.paging;
+package com.uhc.themoviedbmobile.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
@@ -9,7 +9,7 @@ import android.util.Log;
 import com.uhc.themoviedbmobile.api.APIClient;
 import com.uhc.themoviedbmobile.api.MovieAPI;
 import com.uhc.themoviedbmobile.data.DataRepository;
-import com.uhc.themoviedbmobile.data.Movie;
+import com.uhc.themoviedbmobile.model.MovieModel;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class MovieViewModel extends ViewModel {
     }
 
     @SuppressWarnings("unchecked")
-    public LiveData<PagedList<Movie>> getAllMovies() {
+    public LiveData<PagedList<MovieModel>> getAllMovies() {
         getAllMoviesOnline();
         return new LivePagedListBuilder<>(mRepository.getMovies(TOTAL_MOVIES), new PagedList.Config.Builder()
                 .setPageSize(PAGE_SIZE)
@@ -45,12 +45,12 @@ public class MovieViewModel extends ViewModel {
 
     private void getAllMoviesOnline() {
         for (int page = 0; page < TOTAL_PAGES; page++) {
-            Call<ArrayList<Movie>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
-            callBack.enqueue(new Callback<ArrayList<Movie>>() {
+            Call<ArrayList<MovieModel>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
+            callBack.enqueue(new Callback<ArrayList<MovieModel>>() {
                 @Override
-                public void onResponse(Call<ArrayList<Movie>> call, Response<ArrayList<Movie>> response) {
+                public void onResponse(Call<ArrayList<MovieModel>> call, Response<ArrayList<MovieModel>> response) {
                     if (response.isSuccessful()) {
-                        ArrayList<Movie> movies = response.body();
+                        ArrayList<MovieModel> movies = response.body();
 
                         mRepository.insertAll(movies);
 
@@ -62,7 +62,7 @@ public class MovieViewModel extends ViewModel {
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<Movie>> call, Throwable t) {
+                public void onFailure(Call<ArrayList<MovieModel>> call, Throwable t) {
                     String errorMessage;
                     if (t.getMessage() == null) {
                         errorMessage = "Unknown Error";

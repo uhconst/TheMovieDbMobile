@@ -2,7 +2,7 @@ package com.uhc.themoviedbmobile.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.uhc.themoviedbmobile.data.Movie;
+import com.uhc.themoviedbmobile.model.MovieModel;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class APIClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter((new ArrayList<Movie>()).getClass(), new MovieJsonDeserializer())
+                .registerTypeAdapter((new ArrayList<MovieModel>()).getClass(), new MovieJsonDeserializer())
                 .create();
 
         Retrofit.Builder builder = new Retrofit.Builder()

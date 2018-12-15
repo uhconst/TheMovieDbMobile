@@ -1,15 +1,18 @@
-package com.uhc.themoviedbmobile.data;
+package com.uhc.themoviedbmobile.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.uhc.themoviedbmobile.data.DataMovieName;
+
+
 /**
  * Created by const on 12/12/18.
  */
 @Entity(tableName = DataMovieName.TABLE_NAME)
-public class Movie {
+public class MovieModel {
     public static final String IsAdult = "Yes";
     public static final String IsNotAdult = "No";
 

@@ -1,4 +1,4 @@
-package com.uhc.themoviedbmobile.paging;
+package com.uhc.themoviedbmobile.viewmodel;
 
 import android.app.Activity;
 import android.app.Application;

@@ -7,10 +7,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import com.uhc.themoviedbmobile.model.MovieModel;
+
 /**
  * Created by const on 12/12/18.
  */
-@Database(entities = {Movie.class}, version = 1)
+@Database(entities = {MovieModel.class}, version = 1)
 public abstract class TMDMDatabase extends RoomDatabase {
 
     public abstract MovieDao movieDao();

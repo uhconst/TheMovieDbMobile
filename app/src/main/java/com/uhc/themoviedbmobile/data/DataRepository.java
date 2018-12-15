@@ -4,6 +4,8 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.DataSource;
 
+import com.uhc.themoviedbmobile.model.MovieModel;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -35,14 +37,14 @@ public class DataRepository {
         mDao = dao;
     }
 
-    public DataSource.Factory<Integer, Movie> getMovies(int limit) {
+    public DataSource.Factory<Integer, MovieModel> getMovies(int limit) {
         if (limit > 0)
             return mDao.getAllLimited(limit);
 
         return mDao.getAll();
     }
 
-    public LiveData<Movie> getMovie(int id) {
+    public LiveData<MovieModel> getMovie(int id) {
         try {
             return mIoExecutor.submit(() -> mDao.getMovieById(id)).get();
         } catch (InterruptedException | ExecutionException e) {
@@ -51,10 +53,10 @@ public class DataRepository {
         }
     }
 
-    public void insert(Movie movie) {
+    public void insert(MovieModel movie) {
         mIoExecutor.execute(() -> mDao.insert(movie));
     }
-    public void insertAll(ArrayList<Movie> movie) {
+    public void insertAll(ArrayList<MovieModel> movie) {
         mIoExecutor.execute(() -> mDao.insertAll(movie));
     }
 

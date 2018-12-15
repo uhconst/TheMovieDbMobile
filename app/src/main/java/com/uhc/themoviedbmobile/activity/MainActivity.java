@@ -1,4 +1,4 @@
-package com.uhc.themoviedbmobile.activities;
+package com.uhc.themoviedbmobile.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -8,10 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.uhc.themoviedbmobile.R;
-import com.uhc.themoviedbmobile.data.Movie;
-import com.uhc.themoviedbmobile.paging.MovieAdapter;
-import com.uhc.themoviedbmobile.paging.MovieViewModel;
-import com.uhc.themoviedbmobile.paging.ViewModelFactory;
+import com.uhc.themoviedbmobile.adapter.MovieAdapter;
+import com.uhc.themoviedbmobile.model.MovieModel;
+import com.uhc.themoviedbmobile.viewmodel.MovieViewModel;
+import com.uhc.themoviedbmobile.viewmodel.ViewModelFactory;
 
 public class MainActivity extends TMDMActivity {
     private RecyclerView mRecycler;
@@ -54,7 +54,7 @@ public class MainActivity extends TMDMActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Movie movie = ((MovieAdapter.MovieViewHolder) viewHolder).getMovie();
+                MovieModel movie = ((MovieAdapter.MovieViewHolder) viewHolder).getMovie();
                 mViewModel.updateMovieFavorite(movie.getId(), !movie.isFavorite());
             }
         });

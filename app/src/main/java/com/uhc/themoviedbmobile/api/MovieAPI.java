@@ -1,6 +1,6 @@
 package com.uhc.themoviedbmobile.api;
 
-import com.uhc.themoviedbmobile.data.Movie;
+import com.uhc.themoviedbmobile.model.MovieModel;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 public interface MovieAPI {
 
     @GET(".")
-    Call<ArrayList<Movie>> getMovies(@Query(APIClient.API_KEY_PARAM) String api_Key,
-                                     @Query(APIClient.LANGUAGE_REQUEST_PARAM) String language,
-                                     @Query(APIClient.PAGE_REQUEST_PARAM) int page);
+    Call<ArrayList<MovieModel>> getMovies(@Query(APIClient.API_KEY_PARAM) String api_Key,
+                                          @Query(APIClient.LANGUAGE_REQUEST_PARAM) String language,
+                                          @Query(APIClient.PAGE_REQUEST_PARAM) int page);
 }

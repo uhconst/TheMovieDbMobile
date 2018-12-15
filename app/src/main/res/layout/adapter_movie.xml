@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/adapter_movie_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/imv_list_item_size"
+        android:layout_height="@dimen/imv_list_item_size"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

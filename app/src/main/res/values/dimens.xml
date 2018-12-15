@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Margin -->
     <dimen name="margin_default">10dp</dimen>
+
+    <!-- Size List Item Image -->
+    <dimen name="imv_list_item_size">50dp</dimen>
 
 </resources>

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/txv_details_poster"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/imv_details_poster_size"
+        android:layout_height="@dimen/imv_details_poster_size"
         android:src="@drawable/logo" />
 
     <TextView

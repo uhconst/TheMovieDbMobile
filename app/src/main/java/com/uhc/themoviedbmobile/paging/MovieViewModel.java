@@ -22,10 +22,11 @@ import retrofit2.Response;
  */
 public class MovieViewModel extends ViewModel {
 
+    private final static int PAGE_SIZE = 20;
+    private final static int TOTAL_PAGES = 3;
+    private final static boolean PLACEHOLDERS = true;
     private final DataRepository mRepository;
     private final MovieAPI mAPI;
-    private static int PAGE_SIZE = 30;
-    private static boolean PLACEHOLDERS = true;
 
     public MovieViewModel(DataRepository repository) {
         mRepository = repository;
@@ -42,34 +43,37 @@ public class MovieViewModel extends ViewModel {
     }
 
     private void getAllMoviesOnline() {
-        Call<ArrayList<Movie>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, 1);
-        callBack.enqueue(new Callback<ArrayList<Movie>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Movie>> call, Response<ArrayList<Movie>> response) {
-                if (response.isSuccessful()) {
-                    ArrayList<Movie> movies = response.body();
+        for (int page = 0; page < TOTAL_PAGES; page++) {
+            Call<ArrayList<Movie>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
+            callBack.enqueue(new Callback<ArrayList<Movie>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Movie>> call, Response<ArrayList<Movie>> response) {
+                    if (response.isSuccessful()) {
+                        ArrayList<Movie> movies = response.body();
 
-                    mRepository.insertAll(movies);
+                        mRepository.insertAll(movies);
 
-                } else {
-                    Log.e("API CALL", response.message());
+                    } else {
+                        Log.e("API CALL", response.message());
+                        // todo
 //                    networkState.postValue(new NetworkState(NetworkState.Status.FAILED, response.message()));
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Movie>> call, Throwable t) {
-                String errorMessage;
-                if (t.getMessage() == null) {
-                    errorMessage = "Unknown Error";
-                } else {
-                    errorMessage = t.getMessage();
-                }
-                // todo log errors
+                @Override
+                public void onFailure(Call<ArrayList<Movie>> call, Throwable t) {
+                    String errorMessage;
+                    if (t.getMessage() == null) {
+                        errorMessage = "Unknown Error";
+                    } else {
+                        errorMessage = t.getMessage();
+                    }
+                    // todo log errors
 //                networkState.postValue(new NetworkState(NetworkState.Status.FAILED, errorMessage));
 //                callback.onResult(new ArrayList<>(), Integer.toString(1), Integer.toString(2));
-            }
-        });
+                }
+            });
+        }
     }
 
     public void updateMovieFavorite(int id, boolean favorite) {

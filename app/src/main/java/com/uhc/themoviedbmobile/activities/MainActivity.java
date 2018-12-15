@@ -1,4 +1,4 @@
-package com.uhc.themoviedbmobile;
+package com.uhc.themoviedbmobile.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.facebook.stetho.Stetho;
+import com.uhc.themoviedbmobile.BuildConfig;
+import com.uhc.themoviedbmobile.R;
 import com.uhc.themoviedbmobile.data.Movie;
 import com.uhc.themoviedbmobile.paging.MovieAdapter;
 import com.uhc.themoviedbmobile.paging.MovieViewModel;

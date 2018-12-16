@@ -8,6 +8,8 @@
 
     <!-- Size List Item Image -->
     <dimen name="imv_list_item_size">50dp</dimen>
+    <!-- Size List Item Star Favorite -->
+    <dimen name="imv_list_item_star_size">20dp</dimen>
 
     <!-- Size Deatails Poster Image -->
     <dimen name="imv_details_poster_size">200dp</dimen>

@@ -53,9 +53,19 @@ public class DataRepository {
         }
     }
 
+    public boolean isMovieFavorite(int id) {
+        try {
+            return mIoExecutor.submit(() -> mDao.isMovieFavorite(id)).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public void insert(MovieModel movie) {
         mIoExecutor.execute(() -> mDao.insert(movie));
     }
+
     public void insertAll(ArrayList<MovieModel> movie) {
         mIoExecutor.execute(() -> mDao.insertAll(movie));
     }

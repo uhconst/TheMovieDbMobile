@@ -32,10 +32,17 @@ public interface MovieDao {
 
     /**
      * Returns Movie by id.
-     * @param id Movie id to be get Movie
+     * @param id Movie id to get Movie
      */
     @Query("SELECT * FROM " + DataMovieName.TABLE_NAME + " WHERE " + DataMovieName.COL_ID + " = :id")
     LiveData<MovieModel> getMovieById(int id);
+
+    /**
+     * Returns if Movie is favorite.
+     * @param id Movie id to get Movie
+     */
+    @Query("SELECT favorite FROM " + DataMovieName.TABLE_NAME + " WHERE " + DataMovieName.COL_ID + " = :id")
+    boolean isMovieFavorite(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(ArrayList<MovieModel> movie);

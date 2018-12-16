@@ -17,13 +17,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/adapter_movie_image"
+            android:id="@+id/imv_adapter_movie_poster"
             android:layout_width="@dimen/imv_list_item_size"
             android:layout_height="@dimen/imv_list_item_size"
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/adapter_movie_title"
+            android:id="@+id/txv_adapter_movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_default"
@@ -32,24 +32,24 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/adapter_movie_popularity"
+        android:id="@+id/txv_adapter_movie_popularity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_default"
         android:text="Popularity"
         app:layout_constraintBottom_toBottomOf="@+id/ln_list_item"
-        app:layout_constraintEnd_toStartOf="@+id/adapter_movie_favorite"
+        app:layout_constraintEnd_toStartOf="@+id/imv_adapter_movie_favorite"
         app:layout_constraintTop_toTopOf="@+id/ln_list_item" />
 
-    <TextView
-        android:id="@+id/adapter_movie_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_default"
-        android:text=""
+    <ImageView
+        android:id="@+id/imv_adapter_movie_favorite"
+        android:layout_width="@dimen/imv_list_item_star_size"
+        android:layout_height="@dimen/imv_list_item_star_size"
+        android:layout_marginEnd="@dimen/margin_xxlarge"
+        android:src="@drawable/icon_not_favorite"
+        android:tint="@color/favorite_star_color"
         app:layout_constraintBottom_toBottomOf="@+id/ln_list_item"
         app:layout_constraintEnd_toEndOf="@+id/ln_list_item"
         app:layout_constraintTop_toTopOf="@+id/ln_list_item" />
-
 
 </android.support.constraint.ConstraintLayout>

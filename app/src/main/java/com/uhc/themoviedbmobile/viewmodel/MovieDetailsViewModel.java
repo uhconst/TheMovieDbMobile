@@ -2,7 +2,6 @@ package com.uhc.themoviedbmobile.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.uhc.themoviedbmobile.data.DataRepository;
@@ -12,40 +11,34 @@ import com.uhc.themoviedbmobile.model.MovieModel;
  * Created by const on 12/15/18.
  */
 public class MovieDetailsViewModel extends ViewModel {
-    private final DataRepository mRepository;
-    private MutableLiveData movie;
-    private final MediatorLiveData<MovieModel> mMediator = new MediatorLiveData<>();
-    private LiveData<MovieModel> mMovie = null;
+    private final DataRepository repository;
+    private final MediatorLiveData<MovieModel> mediator = new MediatorLiveData<>();
+    private LiveData<MovieModel> live_data_movie = null;
 
     public MovieDetailsViewModel(DataRepository repository) {
-        this.mRepository = repository;
-        movie = new MutableLiveData<MovieModel>();
-    }
-
-    public MutableLiveData getMovie() {
-        return movie;
+        this.repository = repository;
     }
 
     /**
-     * Load Movie from the database and set up the movie details.
+     * Load Movie from the database and set up the live_data_movie details.
      *
      * @return observable data of Movie
      */
     public MediatorLiveData<MovieModel> setMovie(int id) {
-        if (mMovie == null) {
-            mMediator.addSource(loadMovie(id), mMediator::setValue);
+        if (live_data_movie == null) {
+            mediator.addSource(loadMovie(id), mediator::setValue);
         }
 
-        return mMediator;
+        return mediator;
     }
 
 
     private LiveData<MovieModel> loadMovie(int id) {
-        mMovie = mRepository.getMovie(id);
-        return mMovie;
+        live_data_movie = repository.getMovie(id);
+        return live_data_movie;
     }
 
     public void updateMovieFavorite(int id, boolean favorite) {
-        mRepository.updateMovieFavorite(id, favorite);
+        repository.updateMovieFavorite(id, favorite);
     }
 }

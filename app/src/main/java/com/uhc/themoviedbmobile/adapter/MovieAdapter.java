@@ -4,12 +4,14 @@ import android.arch.paging.PagedListAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -22,7 +24,7 @@ import com.uhc.themoviedbmobile.model.MovieModel;
  * Created by const on 12/12/18.
  */
 public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.MovieViewHolder> {
-
+    private final int MAX_LENGTH = 25;
     private Context ctx;
 
     public MovieAdapter(Context ctx) {
@@ -46,38 +48,37 @@ public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.Movi
         }
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
-        private ImageView mImage;
-        private TextView mTitle;
-        private TextView mPopularity;
-        private TextView mFavorite;
-        private MovieModel mMovie;
+    class MovieViewHolder extends RecyclerView.ViewHolder {
+        private LinearLayout ln_item;
+        private ImageView imv_poster;
+        private ImageView imv_favorite;
+        private TextView txv_title;
+        private TextView txv_popularity;
 
         MovieViewHolder(View itemView) {
             super(itemView);
 
-            mImage = itemView.findViewById(R.id.adapter_movie_image);
-            mTitle = itemView.findViewById(R.id.adapter_movie_title);
-            mPopularity = itemView.findViewById(R.id.adapter_movie_popularity);
-            mFavorite = itemView.findViewById(R.id.adapter_movie_favorite);
-        }
+            ln_item = itemView.findViewById(R.id.ln_list_item);
 
-        public MovieModel getMovie() {
-            return mMovie;
+            txv_title = itemView.findViewById(R.id.txv_adapter_movie_title);
+            txv_popularity = itemView.findViewById(R.id.txv_adapter_movie_popularity);
+
+            imv_poster = itemView.findViewById(R.id.imv_adapter_movie_poster);
+            imv_favorite = itemView.findViewById(R.id.imv_adapter_movie_favorite);
         }
 
         void bindTo(MovieModel movie) {
-            mMovie = movie;
-
             String poster = APIClient.getFullPosterPath(movie.getPoster_path());
-            Picasso.get().load(poster).into(mImage);
+            Picasso.get().load(poster).into(imv_poster);
 
-            String title = movie.getTitle().length() > 30 ? (movie.getTitle().substring(0, 30) + "...") : movie.getTitle();
-            mTitle.setText(title);
-            mPopularity.setText(String.valueOf(movie.getPopularity()));
-            mFavorite.setText(movie.isFavorite() ? "S" : "N"); // todo use a star icon
+            String title = movie.getTitle().length() > MAX_LENGTH ? (movie.getTitle().substring(0, MAX_LENGTH) + "...") : movie.getTitle();
+            txv_title.setText(title);
 
-            mImage.setOnClickListener(view -> {
+            txv_popularity.setText(String.valueOf(movie.getPopularity()));
+            imv_favorite.setImageResource(movie.isFavorite() ? R.drawable.icon_favorite : R.drawable.icon_not_favorite);
+            imv_favorite.setColorFilter(ContextCompat.getColor(ctx, R.color.favorite_star_color));
+
+            ln_item.setOnClickListener(view -> {
                 Intent intent = new Intent(ctx, MovieDetailsActivity.class);
                 intent.putExtra("id",movie.getId());
                 ctx.startActivity(intent);

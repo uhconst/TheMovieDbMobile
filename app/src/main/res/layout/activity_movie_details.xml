@@ -134,12 +134,11 @@
             android:layout_marginTop="@dimen/margin_default"
             android:text="Description" />
 
-        <TextView
+        <com.uncopt.android.widget.text.justify.JustifiedTextView
             android:id="@+id/txv_details_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_default"
             android:text="-" />
-
     </LinearLayout>
 </ScrollView>

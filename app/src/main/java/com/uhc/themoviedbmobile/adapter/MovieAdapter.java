@@ -20,6 +20,8 @@ import com.uhc.themoviedbmobile.activity.MovieDetailsActivity;
 import com.uhc.themoviedbmobile.api.APIClient;
 import com.uhc.themoviedbmobile.model.MovieModel;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by const on 12/12/18.
  */
@@ -74,7 +76,7 @@ public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.Movi
             String title = movie.getTitle().length() > MAX_LENGTH ? (movie.getTitle().substring(0, MAX_LENGTH) + "...") : movie.getTitle();
             txv_title.setText(title);
 
-            txv_popularity.setText(String.valueOf(movie.getPopularity()));
+            txv_popularity.setText(String.valueOf(new DecimalFormat("##.##").format(movie.getPopularity())));
             imv_favorite.setImageResource(movie.isFavorite() ? R.drawable.icon_favorite : R.drawable.icon_not_favorite);
             imv_favorite.setColorFilter(ContextCompat.getColor(ctx, R.color.favorite_star_color));
 

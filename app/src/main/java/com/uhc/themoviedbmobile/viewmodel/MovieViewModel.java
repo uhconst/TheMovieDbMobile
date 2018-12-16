@@ -61,29 +61,21 @@ public class MovieViewModel extends ViewModel {
                         }
 
                     } else {
-                        Log.e("API CALL", response.message());
-                        // todo
-//                    networkState.postValue(new NetworkState(NetworkState.Status.FAILED, response.message()));
+                        Log.e("getAllMoviesOnline", response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<MovieModel>> call, Throwable t) {
                     String errorMessage;
-                    if (t.getMessage() == null) {
+                    if (t.getMessage() == null)
                         errorMessage = "Unknown Error";
-                    } else {
+                    else
                         errorMessage = t.getMessage();
-                    }
-                    // todo log errors
-//                networkState.postValue(new NetworkState(NetworkState.Status.FAILED, errorMessage));
-//                callback.onResult(new ArrayList<>(), Integer.toString(1), Integer.toString(2));
+
+                    Log.e("getAllMoviesOnline", errorMessage);
                 }
             });
         }
-    }
-
-    public void updateMovieFavorite(int id, boolean favorite) {
-        mRepository.updateMovieFavorite(id, favorite);
     }
 }

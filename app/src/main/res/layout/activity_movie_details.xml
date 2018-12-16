@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_default">
-
-    <ImageView
-        android:id="@+id/txv_details_poster"
-        android:layout_width="@dimen/imv_details_poster_size"
-        android:layout_height="@dimen/imv_details_poster_size"
-        android:src="@drawable/logo" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:gravity="center">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_xlarge">
+
+        <ImageView
+            android:id="@+id/txv_details_poster"
+            android:layout_width="@dimen/imv_details_poster_size"
+            android:layout_height="@dimen/imv_details_poster_size"
+            android:src="@drawable/logo" />
 
         <LinearLayout
             android:id="@+id/ln_details_favorite"
@@ -28,8 +26,8 @@
                 android:id="@+id/imv_details_favorite"
                 android:layout_width="@dimen/imv_details_favorite_star"
                 android:layout_height="@dimen/imv_details_favorite_star"
-                android:tint="@color/favorite_star_color"
-                android:src="@drawable/icon_favorite" />
+                android:src="@drawable/icon_favorite"
+                android:tint="@color/favorite_star_color" />
 
         </LinearLayout>
 
@@ -38,94 +36,110 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="Movie Title"
             android:textSize="@dimen/font_size_xxlarge" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_xlarge">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:orientation="vertical"
-            android:paddingEnd="@dimen/margin_default">
+            android:layout_marginTop="@dimen/margin_xlarge">
 
-            <TextView
-                style="@style/TextViewLabelMovieDetails"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Release date: " />
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/margin_default">
 
-            <TextView
-                style="@style/TextViewLabelMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Popularity: " />
+                <TextView
+                    style="@style/TextViewLabelMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Release date: " />
 
-            <TextView
-                style="@style/TextViewLabelMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vote average: " />
+                <TextView
+                    style="@style/TextViewLabelMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popularity: " />
 
-            <TextView
-                style="@style/TextViewLabelMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vote count: " />
+                <TextView
+                    style="@style/TextViewLabelMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vote average: " />
 
-            <TextView
-                style="@style/TextViewLabelMovieDetails"
-                android:layout_width="wrap_content"
+                <TextView
+                    style="@style/TextViewLabelMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vote count: " />
+
+                <TextView
+                    style="@style/TextViewLabelMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adult content: " />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Adult content: " />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txv_details_release_date"
+                    style="@style/TextViewValueMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mm/dd/yyyy" />
+
+                <TextView
+                    android:id="@+id/txv_details_popularity"
+                    style="@style/TextViewValueMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0" />
+
+                <TextView
+                    android:id="@+id/txv_details_vote_average"
+                    style="@style/TextViewValueMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0" />
+
+                <TextView
+                    android:id="@+id/txv_details_vote_count"
+                    style="@style/TextViewValueMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/txv_details_adult"
+                    style="@style/TextViewValueMovieDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            style="@style/TextViewLabelMovieDetails"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/margin_default"
+            android:text="Description" />
 
-            <TextView
-                android:id="@+id/txv_details_release_date"
-                style="@style/TextViewValueMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="mm/dd/yyyy" />
+        <com.codesgood.views.JustifiedTextView
+            android:id="@+id/txv_details_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:text="-" />
 
-            <TextView
-                android:id="@+id/txv_details_popularity"
-                style="@style/TextViewValueMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.0" />
-
-            <TextView
-                android:id="@+id/txv_details_vote_average"
-                style="@style/TextViewValueMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.0" />
-
-            <TextView
-                android:id="@+id/txv_details_vote_count"
-                style="@style/TextViewValueMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0" />
-
-            <TextView
-                android:id="@+id/txv_details_adult"
-                style="@style/TextViewValueMovieDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes" />
-        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

@@ -31,6 +31,7 @@ public class MovieDetailsActivity extends TMDMActivity {
     private TextView txv_vote_average;
     private TextView txv_vote_count;
     private TextView txv_adult;
+    private TextView txv_overview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class MovieDetailsActivity extends TMDMActivity {
         txv_vote_average = findViewById(R.id.txv_details_vote_average);
         txv_vote_count = findViewById(R.id.txv_details_vote_count);
         txv_adult = findViewById(R.id.txv_details_adult);
+        txv_overview = findViewById(R.id.txv_details_overview);
 
         ln_favorite.setOnClickListener(view -> {
             mdViewModel.updateMovieFavorite(movie.getId(), !movie.isFavorite());
@@ -60,9 +62,9 @@ public class MovieDetailsActivity extends TMDMActivity {
     }
 
     private void loadMovie(MovieModel movie) {
-        if (movie == null) {
+        if (movie == null)
             return;
-        }
+
         this.movie = movie;
 
         String poster = APIClient.getFullPosterPath(movie.getPoster_path());
@@ -76,6 +78,7 @@ public class MovieDetailsActivity extends TMDMActivity {
         txv_vote_average.setText(String.valueOf(movie.getVote_average()));
         txv_vote_count.setText(String.valueOf(movie.getVote_count()));
         txv_adult.setText(movie.isAdult() ? MovieModel.IsAdult : MovieModel.IsNotAdult);
+        txv_overview.setText(movie.getOverview());
     }
 
 }

@@ -44,7 +44,7 @@ public class MovieViewModel extends ViewModel {
     }
 
     private void getAllMoviesOnline() {
-        for (int page = 0; page < TOTAL_PAGES; page++) {
+        for (int page = 1; page <= TOTAL_PAGES; page++) {
             Call<ArrayList<MovieModel>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
             callBack.enqueue(new Callback<ArrayList<MovieModel>>() {
                 @Override

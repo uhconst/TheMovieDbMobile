@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.uhc.themoviedbmobile.R;
@@ -56,6 +57,8 @@ public class MovieDetailsActivity extends TMDMActivity {
 
         ln_favorite.setOnClickListener(view -> {
             mdViewModel.updateMovieFavorite(movie.getId(), !movie.isFavorite());
+            String msg = movie.isFavorite() ? "Movie removed from favorite list." : "Movie added to favorite list.";
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         });
 
         mdViewModel.setMovie(id).observe(this, this::loadMovie);

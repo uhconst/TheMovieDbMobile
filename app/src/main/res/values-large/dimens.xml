@@ -2,10 +2,11 @@
 <resources>
     <!-- Size List Item Image -->
     <dimen name="imv_list_item_size">80dp</dimen>
+    <!-- Size List Item Star Favorite -->
+    <dimen name="imv_list_item_star_size">30dp</dimen>
 
-    <!-- Size Deatails Poster Image -->
+    <!-- Size Details Poster Image -->
     <dimen name="imv_details_poster_size">300dp</dimen>
-
-    <!-- Size Deatails Poster Image -->
+    <!-- Size Details Poster Image -->
     <dimen name="imv_details_favorite_star">45dp</dimen>
 </resources>

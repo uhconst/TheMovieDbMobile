@@ -26,7 +26,6 @@
             android:id="@+id/txv_adapter_movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default"
             android:text="Title" />
 
     </LinearLayout>
@@ -45,7 +44,6 @@
         android:id="@+id/imv_adapter_movie_favorite"
         android:layout_width="@dimen/imv_list_item_star_size"
         android:layout_height="@dimen/imv_list_item_star_size"
-        android:layout_marginEnd="@dimen/margin_xxlarge"
         android:src="@drawable/icon_not_favorite"
         android:tint="@color/favorite_star_color"
         app:layout_constraintBottom_toBottomOf="@+id/ln_list_item"

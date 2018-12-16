@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Margin -->
+    <dimen name="margin_xsmall">6dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_default">10dp</dimen>
     <dimen name="margin_large">14dp</dimen>
     <dimen name="margin_xlarge">18dp</dimen>
@@ -11,8 +13,10 @@
     <!-- Size List Item Star Favorite -->
     <dimen name="imv_list_item_star_size">20dp</dimen>
 
-    <!-- Size Deatails Poster Image -->
+    <!-- Size Details Poster Image -->
     <dimen name="imv_details_poster_size">200dp</dimen>
+    <!-- Size Details Poster Image -->
+    <dimen name="imv_details_favorite_star">30dp</dimen>
 
     <!-- Fonts Size -->
     <dimen name="font_size_small">12sp</dimen>
@@ -21,6 +25,4 @@
     <dimen name="font_size_xlarge">18sp</dimen>
     <dimen name="font_size_xxlarge">22sp</dimen>
 
-    <!-- Size Deatails Poster Image -->
-    <dimen name="imv_details_favorite_star">30dp</dimen>
 </resources>

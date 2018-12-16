@@ -24,7 +24,7 @@ import com.uhc.themoviedbmobile.model.MovieModel;
  * Created by const on 12/12/18.
  */
 public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.MovieViewHolder> {
-    private final int MAX_LENGTH = 25;
+    private static final int MAX_LENGTH = 25;
     private Context ctx;
 
     public MovieAdapter(Context ctx) {

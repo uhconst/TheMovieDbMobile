@@ -134,7 +134,7 @@
             android:layout_marginTop="@dimen/margin_default"
             android:text="Description" />
 
-        <com.codesgood.views.JustifiedTextView
+        <TextView
             android:id="@+id/txv_details_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

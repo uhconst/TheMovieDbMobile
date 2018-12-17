@@ -8,6 +8,8 @@
 - [Picasso & Palette](https://github.com/florent37/PicassoPalette)
 - [Constraint layout](https://developer.android.com/training/constraint-layout/index.html)
 - [Testing Support Library](https://developer.android.com/topic/libraries/testing-support-library/index.html)
+- [Stetho](http://facebook.github.io/stetho/)
+- [OkHttp](https://github.com/square/okhttp)
 
 ## TheMovieDbMobile pages
 - Movie list 

@@ -1,5 +1,6 @@
 package com.uhc.themoviedbmobile.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
@@ -14,8 +15,11 @@ import com.uhc.themoviedbmobile.api.APIClient;
 import com.uhc.themoviedbmobile.api.MovieAPI;
 import com.uhc.themoviedbmobile.data.DataRepository;
 import com.uhc.themoviedbmobile.model.MovieModel;
+import com.uhc.themoviedbmobile.utils.TMDMUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,13 +29,13 @@ import retrofit2.Response;
  * Created by const on 12/12/18.
  */
 public class MovieViewModel extends ViewModel {
-
     private final static int PAGE_SIZE = 20;
     private final static int TOTAL_PAGES = 3;
     private final static String DEFAULT_MOVIE_LIMIT = "50";
     private final static boolean PLACEHOLDERS = true;
     private final DataRepository mRepository;
     private final MovieAPI mAPI;
+    private Context ctx;
 
     public MovieViewModel(DataRepository repository) {
         mRepository = repository;
@@ -40,7 +44,9 @@ public class MovieViewModel extends ViewModel {
 
     @SuppressWarnings("unchecked")
     public LiveData<PagedList<MovieModel>> getAllMovies(Context ctx) {
-        getAllMoviesOnline();
+        this.ctx = ctx;
+        if (TMDMUtils.isNetworkAvailable(ctx))
+            getAllMoviesOnline();
 
         int movie_limit = Integer.parseInt(DEFAULT_MOVIE_LIMIT);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -72,6 +78,8 @@ public class MovieViewModel extends ViewModel {
                             }
                         }
 
+                        setLastUpdateNow();
+
                     } else {
                         Log.e("getAllMoviesOnline", response.message());
                     }
@@ -89,5 +97,20 @@ public class MovieViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    public String getLastUpdate() {
+        if (TMDMUtils.isNetworkAvailable(ctx))
+            return "";
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        return prefs.getString(ctx.getString(R.string.pref_key_last_update), "");
+    }
+
+    private void setLastUpdateNow() {
+        @SuppressLint("SimpleDateFormat") String date_time = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(Calendar.getInstance().getTime());
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        prefs.edit().putString(ctx.getString(R.string.pref_key_last_update), date_time).apply();
     }
 }

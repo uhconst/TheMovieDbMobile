@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.uhc.themoviedbmobile.R;
 import com.uhc.themoviedbmobile.adapter.MovieAdapter;
@@ -15,22 +18,31 @@ import com.uhc.themoviedbmobile.viewmodel.MovieViewModel;
 import com.uhc.themoviedbmobile.viewmodel.ViewModelFactory;
 
 public class MainActivity extends TMDMActivity {
+    private MovieViewModel view_model;
+    private LinearLayout ln_last_update;
+    private TextView txv_last_update;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ViewModelFactory viewModelFactory = ViewModelFactory.createFactory(this);
-        MovieViewModel view_model = ViewModelProviders.of(this, viewModelFactory).get(MovieViewModel.class);
+        view_model = ViewModelProviders.of(this, viewModelFactory).get(MovieViewModel.class);
 
         MovieAdapter adapter = new MovieAdapter(this);
         view_model.getAllMovies(this).observe(this, adapter::submitList);
+
+        ln_last_update = findViewById(R.id.ln_last_update);
+        txv_last_update = findViewById(R.id.txv_last_update);
 
         RecyclerView rv = findViewById(R.id.rv_movies);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rv.setHasFixedSize(true);
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adapter);
+
+        setLastUpdate();
     }
 
     @Override
@@ -51,5 +63,13 @@ public class MainActivity extends TMDMActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setLastUpdate() {
+        String last_update = view_model.getLastUpdate();
+        if (!last_update.isEmpty()) {
+            ln_last_update.setVisibility(View.VISIBLE);
+            txv_last_update.setText(last_update);
+        }
     }
 }

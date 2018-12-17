@@ -10,7 +10,7 @@
     </style>
 
     <style name="TextViewLabelMovieDetails">
-        <item name="android:textColor">@color/cinza_text</item>
+        <item name="android:textColor">@color/grey_text</item>
         <item name="android:layout_marginBottom">@dimen/margin_default</item>
     </style>
 
@@ -19,4 +19,8 @@
         <item name="android:layout_marginBottom">@dimen/margin_default</item>
     </style>
 
+    <style name="TextViewListLastUpdate">
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:textColor">@color/grey_text</item>
+    </style>
 </resources>

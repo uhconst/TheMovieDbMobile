@@ -31,6 +31,7 @@ Android application to browse the top 50 movies in popularity descending order, 
 - Using Stetho lib for better debug and consult database tables (Stetho is only enabled on DEBUG mode)
 - Using different sizes for larger devices on dimens and dimens-large
 - Using styles resource for components with same attributes
+- Project hosted on [https://github.com/uhconst/TheMovieDbMobile]GitHub
 
 
 ## Developed by

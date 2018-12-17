@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.uhc.themoviedbmobile.activity.MainActivity;
 import com.uhc.themoviedbmobile.activity.MovieDetailsActivity;
+import com.uhc.themoviedbmobile.activity.SettingActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,5 +34,15 @@ public class MainActivityTest {
         onView(withId(R.id.rv_movies))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         intended(hasComponent(MovieDetailsActivity.class.getName()));
+    }
+
+    /**
+     * Verify if when the setting item on toolbar is clicked the activity SettingActivity is opened
+     */
+    @Test
+    public void verifySettingsClick_MainActivity() {
+        onView(withId(R.id.action_settings))
+                .perform(click());
+        intended(hasComponent(SettingActivity.class.getName()));
     }
 }

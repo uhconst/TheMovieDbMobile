@@ -46,8 +46,8 @@ public class MovieViewModel extends ViewModel {
     @SuppressWarnings("unchecked")
     public LiveData<PagedList<MovieModel>> getAllMovies(Context ctx) {
         this.weak_ctx = new WeakReference<>(ctx);
-        if (TMDMUtils.isNetworkAvailable(ctx))
-            getAllMoviesOnline();
+
+        getAllMoviesOnline();
 
         int movie_limit = Integer.parseInt(DEFAULT_MOVIE_LIMIT);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -62,41 +62,46 @@ public class MovieViewModel extends ViewModel {
                 .build()).build();
     }
 
-    private void getAllMoviesOnline() {
-        for (int page = 1; page <= TOTAL_PAGES; page++) {
-            Call<ArrayList<MovieModel>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
-            callBack.enqueue(new Callback<ArrayList<MovieModel>>() {
-                @Override
-                public void onResponse(Call<ArrayList<MovieModel>> call, Response<ArrayList<MovieModel>> response) {
-                    if (response.isSuccessful()) {
-                        ArrayList<MovieModel> movies = response.body();
+    public void getAllMoviesOnline() {
+        if (TMDMUtils.isNetworkAvailable(weak_ctx.get())) {
+            for (int page = 1; page <= TOTAL_PAGES; page++) {
+                Call<ArrayList<MovieModel>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
+                callBack.enqueue(new Callback<ArrayList<MovieModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<MovieModel>> call, Response<ArrayList<MovieModel>> response) {
+                        if (response.isSuccessful()) {
+                            ArrayList<MovieModel> movies = response.body();
 
-                        if (movies != null) {
-                            for (MovieModel movie : movies) {
-                                boolean isFavorite = mRepository.isMovieFavorite(movie.getId());
-                                movie.setFavorite(isFavorite);
-                                mRepository.insert(movie);
+                            if (movies != null) {
+                                for (MovieModel movie : movies) {
+                                    boolean isFavorite = mRepository.isMovieFavorite(movie.getId());
+                                    movie.setFavorite(isFavorite);
+                                    mRepository.insert(movie);
+                                }
                             }
+
+                            setLastUpdateNow();
+
+                        } else {
+                            Log.e("getAllMoviesOnline", response.message());
                         }
-
-                        setLastUpdateNow();
-
-                    } else {
-                        Log.e("getAllMoviesOnline", response.message());
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ArrayList<MovieModel>> call, Throwable t) {
-                    String errorMessage;
-                    if (t.getMessage() == null)
-                        errorMessage = "Unknown Error";
-                    else
-                        errorMessage = t.getMessage();
+                    @Override
+                    public void onFailure(Call<ArrayList<MovieModel>> call, Throwable t) {
+                        String errorMessage;
+                        if (t.getMessage() == null)
+                            errorMessage = "Unknown Error";
+                        else
+                            errorMessage = t.getMessage();
 
-                    Log.e("getAllMoviesOnline", errorMessage);
-                }
-            });
+                        Log.e("getAllMoviesOnline", errorMessage);
+                    }
+                });
+            }
+
+        } else {
+            Log.d("getAllMoviesOnline", "No connection.");
         }
     }
 

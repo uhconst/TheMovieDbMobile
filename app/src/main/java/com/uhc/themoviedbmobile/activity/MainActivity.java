@@ -3,6 +3,7 @@ package com.uhc.themoviedbmobile.activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,13 @@ public class MainActivity extends TMDMActivity {
         rv.setAdapter(adapter);
 
         setLastUpdate();
+
+        SwipeRefreshLayout pullToRefresh = findViewById(R.id.srl_refresh);
+        pullToRefresh.setOnRefreshListener(() -> {
+            view_model.getAllMoviesOnline();
+            setLastUpdate();
+            pullToRefresh.setRefreshing(false);
+        });
     }
 
     @Override
@@ -67,9 +75,7 @@ public class MainActivity extends TMDMActivity {
 
     private void setLastUpdate() {
         String last_update = view_model.getLastUpdate();
-        if (!last_update.isEmpty()) {
-            ln_last_update.setVisibility(View.VISIBLE);
-            txv_last_update.setText(last_update);
-        }
+        txv_last_update.setText(last_update);
+        ln_last_update.setVisibility(last_update.isEmpty() ? View.GONE : View.VISIBLE);
     }
 }

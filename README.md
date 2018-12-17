@@ -1,4 +1,5 @@
 # TheMovieDbMobile
+Android application to browse the top 50 movies in popularity descending order, showing pictures and inspecting movies details.
 
 ## Libraries used in this project
 - [Paging](https://developer.android.com/topic/libraries/architecture/paging.html#overview)

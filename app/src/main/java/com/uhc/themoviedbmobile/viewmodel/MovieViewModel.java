@@ -17,6 +17,7 @@ import com.uhc.themoviedbmobile.data.DataRepository;
 import com.uhc.themoviedbmobile.model.MovieModel;
 import com.uhc.themoviedbmobile.utils.TMDMUtils;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +36,7 @@ public class MovieViewModel extends ViewModel {
     private final static boolean PLACEHOLDERS = true;
     private final DataRepository mRepository;
     private final MovieAPI mAPI;
-    private Context ctx;
+    private WeakReference<Context> weak_ctx;
 
     public MovieViewModel(DataRepository repository) {
         mRepository = repository;
@@ -44,7 +45,7 @@ public class MovieViewModel extends ViewModel {
 
     @SuppressWarnings("unchecked")
     public LiveData<PagedList<MovieModel>> getAllMovies(Context ctx) {
-        this.ctx = ctx;
+        this.weak_ctx = new WeakReference<>(ctx);
         if (TMDMUtils.isNetworkAvailable(ctx))
             getAllMoviesOnline();
 
@@ -100,17 +101,17 @@ public class MovieViewModel extends ViewModel {
     }
 
     public String getLastUpdate() {
-        if (TMDMUtils.isNetworkAvailable(ctx))
+        if (TMDMUtils.isNetworkAvailable(weak_ctx.get()))
             return "";
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return prefs.getString(ctx.getString(R.string.pref_key_last_update), "");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(weak_ctx.get());
+        return prefs.getString(weak_ctx.get().getString(R.string.pref_key_last_update), "");
     }
 
     private void setLastUpdateNow() {
         @SuppressLint("SimpleDateFormat") String date_time = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(Calendar.getInstance().getTime());
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        prefs.edit().putString(ctx.getString(R.string.pref_key_last_update), date_time).apply();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(weak_ctx.get());
+        prefs.edit().putString(weak_ctx.get().getString(R.string.pref_key_last_update), date_time).apply();
     }
 }

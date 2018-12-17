@@ -5,6 +5,6 @@
     <string name="pref_key_last_update" translatable="false">pref_key_last_update</string>
     <string name="pref_key_limit" translatable="false">pref_key_limit</string>
     <string name="pref_limit_title">Movie limit</string>
-    <string name="pref_limit_summary">Show movie limit for the list.</string>
+    <string name="pref_limit_summary">Set movie limit for the list.</string>
     <string name="action_settings">Settings</string>
 </resources>

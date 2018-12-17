@@ -4,8 +4,12 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.uhc.themoviedbmobile.R;
 import com.uhc.themoviedbmobile.api.APIClient;
 import com.uhc.themoviedbmobile.api.MovieAPI;
 import com.uhc.themoviedbmobile.data.DataRepository;
@@ -23,8 +27,8 @@ import retrofit2.Response;
 public class MovieViewModel extends ViewModel {
 
     private final static int PAGE_SIZE = 20;
-    private final static int TOTAL_MOVIES = 50;
     private final static int TOTAL_PAGES = 3;
+    private final static String DEFAULT_MOVIE_LIMIT = "50";
     private final static boolean PLACEHOLDERS = true;
     private final DataRepository mRepository;
     private final MovieAPI mAPI;
@@ -35,9 +39,17 @@ public class MovieViewModel extends ViewModel {
     }
 
     @SuppressWarnings("unchecked")
-    public LiveData<PagedList<MovieModel>> getAllMovies() {
+    public LiveData<PagedList<MovieModel>> getAllMovies(Context ctx) {
         getAllMoviesOnline();
-        return new LivePagedListBuilder<>(mRepository.getMovies(TOTAL_MOVIES), new PagedList.Config.Builder()
+
+        int movie_limit = Integer.parseInt(DEFAULT_MOVIE_LIMIT);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        String pref_limit = prefs.getString(ctx.getString(R.string.pref_key_limit), DEFAULT_MOVIE_LIMIT);
+
+        if (pref_limit != null)
+            movie_limit = Integer.parseInt(pref_limit);
+
+        return new LivePagedListBuilder<>(mRepository.getMovies(movie_limit), new PagedList.Config.Builder()
                 .setPageSize(PAGE_SIZE)
                 .setEnablePlaceholders(PLACEHOLDERS)
                 .build()).build();

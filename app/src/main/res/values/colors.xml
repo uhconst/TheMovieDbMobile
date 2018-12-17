@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#0b181b</color>
     <color name="colorAccent">#1ec65f</color>
 
+    <color name="title_toolbar">@color/colorPrimaryDark</color>
+
     <!-- Texts -->
     <color name="cinza_text">#868686</color>
 

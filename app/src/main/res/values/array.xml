@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="number_movies_limit">
+        <item>Limit for 15 popular movies</item>
+        <item>Limit for 30 popular movies</item>
+        <item>Limit for 50 popular movies</item>
+    </string-array>
+    <string-array name="number_movies_limit_value">
+        <item>15</item>
+        <item>30</item>
+        <item>50</item>
+    </string-array>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:id="@+id/n_answers"
+        android:key="@string/pref_key_limit"
+        android:title="@string/pref_limit_title"
+        android:summary="@string/pref_limit_summary"
+        android:entries="@array/number_movies_limit"
+        android:entryValues="@array/number_movies_limit_value"
+        android:defaultValue="50"/>
+
+</PreferenceScreen>

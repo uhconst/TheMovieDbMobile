@@ -56,6 +56,7 @@ dependencies {
     implementation "com.android.support:animated-vector-drawable:$support_version"
     implementation "com.android.support:exifinterface:$support_version"
     implementation "com.android.support:recyclerview-v7:$support_version"
+    implementation "com.android.support:preference-v7:$support_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
     implementation "android.arch.persistence.room:common:$room_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_version"

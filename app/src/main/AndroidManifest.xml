@@ -21,6 +21,10 @@
         <activity
             android:name=".activity.MovieDetailsActivity"
             android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.TMDMActivity" />
     </application>
 
 </manifest>

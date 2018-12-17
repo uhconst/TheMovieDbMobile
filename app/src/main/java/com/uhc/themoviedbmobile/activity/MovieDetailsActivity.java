@@ -21,6 +21,7 @@ import com.uhc.themoviedbmobile.viewmodel.ViewModelFactory;
 public class MovieDetailsActivity extends TMDMActivity {
     private MovieDetailsViewModel mdViewModel;
     private MovieModel movie;
+    private Toast toast_message;
     private int id;
 
     private ImageView imv_poster;
@@ -58,7 +59,13 @@ public class MovieDetailsActivity extends TMDMActivity {
         ln_favorite.setOnClickListener(view -> {
             mdViewModel.updateMovieFavorite(movie.getId(), !movie.isFavorite());
             String msg = movie.isFavorite() ? "Movie removed from favorite list." : "Movie added to favorite list.";
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+            //Get object so it is possible cancel, when user gets multiple click it will not have a delay
+            if (toast_message!= null)
+                toast_message.cancel();
+
+            toast_message = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+            toast_message.show();
         });
 
         mdViewModel.setMovie(id).observe(this, this::loadMovie);

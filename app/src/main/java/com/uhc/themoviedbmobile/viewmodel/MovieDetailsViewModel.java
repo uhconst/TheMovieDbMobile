@@ -2,6 +2,7 @@ package com.uhc.themoviedbmobile.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.uhc.themoviedbmobile.data.DataRepository;
@@ -13,6 +14,7 @@ import com.uhc.themoviedbmobile.model.MovieModel;
 public class MovieDetailsViewModel extends ViewModel {
     private final DataRepository repository;
     private final MediatorLiveData<MovieModel> mediator = new MediatorLiveData<>();
+    private final MutableLiveData<String> msg_update = new MutableLiveData<>();
     private LiveData<MovieModel> live_data_movie = null;
 
     public MovieDetailsViewModel(DataRepository repository) {
@@ -40,5 +42,10 @@ public class MovieDetailsViewModel extends ViewModel {
 
     public void updateMovieFavorite(int id, boolean favorite) {
         repository.updateMovieFavorite(id, favorite);
+        msg_update.setValue(favorite ? "Movie added to favorite list." : "Movie removed from favorite list.");
+    }
+
+    public MutableLiveData<String> getFavoriteMsg() {
+        return msg_update;
     }
 }

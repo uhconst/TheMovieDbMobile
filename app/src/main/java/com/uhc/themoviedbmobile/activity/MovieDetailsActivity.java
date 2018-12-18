@@ -19,14 +19,12 @@ import com.uhc.themoviedbmobile.viewmodel.ViewModelFactory;
  * Created by const on 12/15/18.
  */
 public class MovieDetailsActivity extends TMDMActivity {
-    private MovieDetailsViewModel mdViewModel;
+    private MovieDetailsViewModel movie_details_view_model;
     private MovieModel movie;
     private Toast toast_message;
-    private int id;
 
     private ImageView imv_poster;
     private ImageView imv_favorite;
-    private LinearLayout ln_favorite;
     private TextView txv_title;
     private TextView txv_release_date;
     private TextView txv_popularity;
@@ -40,14 +38,13 @@ public class MovieDetailsActivity extends TMDMActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-        id = getIntent().getIntExtra("id", 0);
+        int id = getIntent().getIntExtra("id", 0);
 
         ViewModelFactory viewModelFactory = ViewModelFactory.createFactory(this);
-        mdViewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieDetailsViewModel.class);
+        movie_details_view_model = ViewModelProviders.of(this, viewModelFactory).get(MovieDetailsViewModel.class);
 
         imv_poster = findViewById(R.id.txv_details_poster);
         txv_title = findViewById(R.id.txv_details_title);
-        ln_favorite = findViewById(R.id.ln_details_favorite);
         imv_favorite = findViewById(R.id.imv_details_favorite);
         txv_release_date = findViewById(R.id.txv_details_release_date);
         txv_popularity = findViewById(R.id.txv_details_popularity);
@@ -56,19 +53,13 @@ public class MovieDetailsActivity extends TMDMActivity {
         txv_adult = findViewById(R.id.txv_details_adult);
         txv_overview = findViewById(R.id.txv_details_overview);
 
+        LinearLayout ln_favorite = findViewById(R.id.ln_details_favorite);
         ln_favorite.setOnClickListener(view -> {
-            mdViewModel.updateMovieFavorite(movie.getId(), !movie.isFavorite());
-            String msg = movie.isFavorite() ? "Movie removed from favorite list." : "Movie added to favorite list.";
-
-            //Get object so it is possible cancel, when user gets multiple click it will not have a delay
-            if (toast_message!= null)
-                toast_message.cancel();
-
-            toast_message = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
-            toast_message.show();
+            movie_details_view_model.updateMovieFavorite(movie.getId(), !movie.isFavorite());
         });
 
-        mdViewModel.setMovie(id).observe(this, this::loadMovie);
+        movie_details_view_model.setMovie(id).observe(this, this::loadMovie);
+        movie_details_view_model.getFavoriteMsg().observe(this, this::displayFavoriteToast);
     }
 
     private void loadMovie(MovieModel movie) {
@@ -91,4 +82,12 @@ public class MovieDetailsActivity extends TMDMActivity {
         txv_overview.setText(movie.getOverview());
     }
 
+    private void displayFavoriteToast(String msg) {
+        //Get object so it is possible cancel, when user gets multiple click it will not have a delay
+        if (toast_message!= null)
+            toast_message.cancel();
+
+        toast_message = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        toast_message.show();
+    }
 }

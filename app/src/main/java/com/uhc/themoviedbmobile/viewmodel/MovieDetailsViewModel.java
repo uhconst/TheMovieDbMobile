@@ -42,7 +42,7 @@ public class MovieDetailsViewModel extends ViewModel {
 
     public void updateMovieFavorite(int id, boolean favorite) {
         repository.updateMovieFavorite(id, favorite);
-        msg_update.setValue(favorite ? "Movie added to favorite list." : "Movie removed from favorite list.");
+        msg_update.setValue(favorite ? MovieModel.FavoriteAdded : MovieModel.FavoriteRemoved);
     }
 
     public MutableLiveData<String> getFavoriteMsg() {

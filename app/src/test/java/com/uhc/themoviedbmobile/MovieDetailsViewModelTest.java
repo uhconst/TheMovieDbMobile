@@ -3,6 +3,7 @@ package com.uhc.themoviedbmobile;
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import com.uhc.themoviedbmobile.data.DataRepository;
+import com.uhc.themoviedbmobile.model.MovieModel;
 import com.uhc.themoviedbmobile.viewmodel.MovieDetailsViewModel;
 
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class MovieDetailsViewModelTest {
         String msg = movie_details_view_model.getFavoriteMsg().getValue();
 
         assert(msg != null);
-        assert(msg.equals("Movie added to favorite list."));
+        assert(msg.equals(MovieModel.FavoriteAdded));
     }
 
     @Test
@@ -50,6 +51,6 @@ public class MovieDetailsViewModelTest {
         String msg = movie_details_view_model.getFavoriteMsg().getValue();
 
         assert(msg != null);
-        assert(msg.equals("Movie removed from favorite list."));
+        assert(msg.equals(MovieModel.FavoriteRemoved));
     }
 }

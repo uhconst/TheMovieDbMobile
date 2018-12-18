@@ -16,6 +16,9 @@ public class MovieModel {
     public static final String IsAdult = "Yes";
     public static final String IsNotAdult = "No";
 
+    public static final String FavoriteAdded = "Movie added to favorite list.";
+    public static final String FavoriteRemoved = "Movie removed from favorite list.";
+
     @PrimaryKey
     @ColumnInfo(name = DataMovieName.COL_ID)
     @NonNull

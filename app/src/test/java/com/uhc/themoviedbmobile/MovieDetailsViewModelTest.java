@@ -26,19 +26,19 @@ public class MovieDetailsViewModelTest {
     public TestRule rule = new InstantTaskExecutorRule();
 
     @Mock
-    private DataRepository userRepository;
+    private DataRepository data_repository;
 
-    private MovieDetailsViewModel loginViewModel;
+    private MovieDetailsViewModel movie_details_view_model;
 
     @Before
     public void setUp() {
-        loginViewModel = new MovieDetailsViewModel(userRepository);
+        movie_details_view_model = new MovieDetailsViewModel(data_repository);
     }
 
     @Test
     public void assertMessageFavoriteAdded() {
-        loginViewModel.updateMovieFavorite(1, true);
-        String msg = loginViewModel.getFavoriteMsg().getValue();
+        movie_details_view_model.updateMovieFavorite(1, true);
+        String msg = movie_details_view_model.getFavoriteMsg().getValue();
 
         assert(msg != null);
         assert(msg.equals("Movie added to favorite list."));
@@ -46,8 +46,8 @@ public class MovieDetailsViewModelTest {
 
     @Test
     public void assertMessageFavoriteRemoved() {
-        loginViewModel.updateMovieFavorite(1, false);
-        String msg = loginViewModel.getFavoriteMsg().getValue();
+        movie_details_view_model.updateMovieFavorite(1, false);
+        String msg = movie_details_view_model.getFavoriteMsg().getValue();
 
         assert(msg != null);
         assert(msg.equals("Movie removed from favorite list."));

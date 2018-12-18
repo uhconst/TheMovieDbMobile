@@ -14,7 +14,8 @@
             android:id="@+id/txv_details_poster"
             android:layout_width="@dimen/imv_details_poster_size"
             android:layout_height="@dimen/imv_details_poster_size"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            android:transitionName="@string/poster_transition" />
 
         <LinearLayout
             android:id="@+id/ln_details_favorite"
@@ -36,9 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textStyle="bold"
             android:text="Movie Title"
-            android:textSize="@dimen/font_size_xxlarge" />
+            android:textSize="@dimen/font_size_xxlarge"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"

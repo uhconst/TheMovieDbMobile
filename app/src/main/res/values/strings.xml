@@ -7,4 +7,7 @@
     <string name="pref_limit_title">Movie limit</string>
     <string name="pref_limit_summary">Set movie limit for the list.</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Transitions -->
+    <string name="poster_transition">poster_transition</string>
 </resources>

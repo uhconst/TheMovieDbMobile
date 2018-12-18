@@ -1,5 +1,7 @@
 package com.uhc.themoviedbmobile.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -83,7 +85,10 @@ public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.Movi
             ln_item.setOnClickListener(view -> {
                 Intent intent = new Intent(ctx, MovieDetailsActivity.class);
                 intent.putExtra("id",movie.getId());
-                ctx.startActivity(intent);
+                ActivityOptions transition_activity =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity) ctx, imv_poster,
+                                ctx.getResources().getString(R.string.poster_transition));
+                ctx.startActivity(intent, transition_activity.toBundle());
             });
         }
     }

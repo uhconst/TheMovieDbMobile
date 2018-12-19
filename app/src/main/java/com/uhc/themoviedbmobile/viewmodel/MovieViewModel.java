@@ -51,7 +51,6 @@ public class MovieViewModel extends ViewModel {
         getAllMoviesOnline();
 
         int movie_limit = Integer.parseInt(DEFAULT_MOVIE_LIMIT);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String pref_limit = prefs.getString(ctx.getString(R.string.pref_key_limit), DEFAULT_MOVIE_LIMIT);
 
         if (pref_limit != null)

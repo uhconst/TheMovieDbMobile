@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
  */
 public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.MovieViewHolder> {
     private static final int MAX_LENGTH = 25;
-    private Context ctx;
+    final private Context ctx;
 
     public MovieAdapter(Context ctx) {
         super(DIFF_CALLBACK);
@@ -53,11 +53,11 @@ public class MovieAdapter extends PagedListAdapter<MovieModel, MovieAdapter.Movi
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout ln_item;
-        private ImageView imv_poster;
-        private ImageView imv_favorite;
-        private TextView txv_title;
-        private TextView txv_popularity;
+        final private LinearLayout ln_item;
+        final private ImageView imv_poster;
+        final private ImageView imv_favorite;
+        final private TextView txv_title;
+        final private TextView txv_popularity;
 
         MovieViewHolder(View itemView) {
             super(itemView);

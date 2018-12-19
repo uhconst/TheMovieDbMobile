@@ -90,7 +90,7 @@ public class MainActivity extends TMDMActivity {
             txv_empty_list.setText("");
     }
 
-    public void displayRefreshing(boolean refreshing) {
+    private void displayRefreshing(boolean refreshing) {
         if (!refreshing)
             pullToRefresh.setRefreshing(false);
     }

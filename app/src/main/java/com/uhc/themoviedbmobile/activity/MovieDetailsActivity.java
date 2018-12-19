@@ -55,9 +55,7 @@ public class MovieDetailsActivity extends TMDMActivity {
         txv_overview = findViewById(R.id.txv_details_overview);
 
         LinearLayout ln_favorite = findViewById(R.id.ln_details_favorite);
-        ln_favorite.setOnClickListener(view -> {
-            movie_details_view_model.updateMovieFavorite(movie.getId(), !movie.isFavorite());
-        });
+        ln_favorite.setOnClickListener(view -> movie_details_view_model.updateMovieFavorite(movie.getId(), !movie.isFavorite()));
 
         movie_details_view_model.setMovie(id).observe(this, this::loadMovie);
         movie_details_view_model.getFavoriteMsg().observe(this, this::displayFavoriteToast);

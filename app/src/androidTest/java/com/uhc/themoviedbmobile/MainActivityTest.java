@@ -30,7 +30,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
     @Rule
-    public IntentsTestRule<MainActivity> activity_rule = new IntentsTestRule<>(MainActivity.class, true,false);
+    final public IntentsTestRule<MainActivity> activity_rule = new IntentsTestRule<>(MainActivity.class, true,false);
 
     private Context ctx;
 

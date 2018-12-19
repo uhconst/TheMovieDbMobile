@@ -35,8 +35,8 @@ public class MovieViewModel extends ViewModel {
     private final static boolean PLACEHOLDERS = true;
     private final DataRepository repository;
     private final MovieAPI movie_api;
-    private MutableLiveData<Boolean> first_time = new MutableLiveData<>();
-    private MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> first_time = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
     private WeakReference<Context> weak_ctx;
     private SharedPreferences prefs;
     private boolean inative_all;
@@ -101,7 +101,7 @@ public class MovieViewModel extends ViewModel {
                     }
 
                     @Override
-                    public void onFailure(Call<ArrayList<MovieModel>> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ArrayList<MovieModel>> call, @NonNull Throwable t) {
                         String errorMessage;
                         if (t.getMessage() == null)
                             errorMessage = "Unknown Error";

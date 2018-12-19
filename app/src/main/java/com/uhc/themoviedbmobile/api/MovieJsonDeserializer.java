@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 class MovieJsonDeserializer implements JsonDeserializer {
 
-    private static String TAG = MovieJsonDeserializer.class.getSimpleName();
+    private final static String TAG = MovieJsonDeserializer.class.getSimpleName();
 
     @Override
     public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

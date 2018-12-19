@@ -25,7 +25,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         return new ViewModelFactory(DataRepository.getInstance(application));
     }
 
-    public ViewModelFactory(DataRepository repository) {
+    private ViewModelFactory(DataRepository repository) {
         mRepository = repository;
     }
 

@@ -9,9 +9,13 @@ Android application to browse the top 50 movies in popularity descending order, 
 - [Picasso & Palette](https://github.com/florent37/PicassoPalette)
 - [Constraint layout](https://developer.android.com/training/constraint-layout/index.html)
 - [Testing Support Library](https://developer.android.com/topic/libraries/testing-support-library/index.html)
+- [Espresso](https://developer.android.com/training/testing/espresso/)
+- [Mockito](https://site.mockito.org)
 - [Stetho](http://facebook.github.io/stetho/)
+- [Retrofit](https://square.github.io/retrofit/)
 - [OkHttp](https://github.com/square/okhttp)
 - [Gson](https://github.com/google/gson)
+- [Justified TextView and EditText](https://github.com/programingjd/justified)
 
 ## TheMovieDbMobile pages
 - Movie list 
@@ -19,6 +23,7 @@ Android application to browse the top 50 movies in popularity descending order, 
 - Settings
 
 ## What you should expect
+- MVVM architecture pattern
 - The database is inserted from the API results when it has connection
 - All functions work offline 
 - Showing last day and time sincronized on top of the list (in case it is offline)
@@ -29,10 +34,19 @@ Android application to browse the top 50 movies in popularity descending order, 
 - Application have a default icon and a round icon for devices with such configuration
 - DEBUG and REALEASE mode
 - Using Stetho lib for better debug and consult database tables (Stetho is only enabled on DEBUG mode)
+- Smooth Transition between Movies List and Movie Details page
+- Unit tests
+- Instrumentation tests
 - Using different sizes for larger devices on dimens and dimens-large
 - Using styles resource for components with same attributes
 - Project hosted on [GitHub](https://github.com/uhconst/TheMovieDbMobile.git)
 
+# Bonus points
+- **[DONE]** Feature: The user should be able to save items as favourites, and these should be retained
+across app restarts, kill or catalog refresh
+- **[DONE]** Feature: Work offline. Ability to download content and use it while offline. We love offline!
+- **[DONE]** Feature: Infinite scroll / Lazy load of more items.
+- **[DONE]** Transition: The ability to provide smooth transitions between screens and states
 
 ## Developed by
 Uryel Constancio - [uryelhenrique.c@gmail.com](uryelhenrique.c@gmail.com)

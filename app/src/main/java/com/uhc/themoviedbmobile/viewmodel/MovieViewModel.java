@@ -36,6 +36,7 @@ public class MovieViewModel extends ViewModel {
     private final DataRepository repository;
     private final MovieAPI movie_api;
     private MutableLiveData<Boolean> first_time = new MutableLiveData<>();
+    private MutableLiveData<Boolean> refreshing = new MutableLiveData<>();
     private WeakReference<Context> weak_ctx;
     private SharedPreferences prefs;
     private boolean inative_all;
@@ -92,6 +93,7 @@ public class MovieViewModel extends ViewModel {
                             }
 
                             setLastUpdateNow();
+                            refreshing.setValue(false);
 
                         } else {
                             Log.e("getAllMoviesOnline", response.message());
@@ -106,12 +108,13 @@ public class MovieViewModel extends ViewModel {
                         else
                             errorMessage = t.getMessage();
 
+                        refreshing.setValue(false);
                         Log.e("getAllMoviesOnline", errorMessage);
                     }
                 });
             }
-
         } else {
+            refreshing.setValue(false);
             first_time.setValue(prefs.getBoolean(weak_ctx.get().getString(R.string.pref_key_first_time), true));
             Log.d("getAllMoviesOnline", "No connection.");
         }
@@ -129,5 +132,9 @@ public class MovieViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> isFirstTime() {
         return first_time;
+    }
+
+    public MutableLiveData<Boolean> isRefreshing() {
+        return refreshing;
     }
 }

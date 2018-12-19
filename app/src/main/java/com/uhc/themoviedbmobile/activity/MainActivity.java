@@ -23,6 +23,7 @@ public class MainActivity extends TMDMActivity {
     private LinearLayout ln_last_update;
     private TextView txv_last_update;
     private TextView txv_empty_list;
+    private SwipeRefreshLayout pullToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends TMDMActivity {
         MovieAdapter adapter = new MovieAdapter(this);
         view_model.getAllMovies(this).observe(this, adapter::submitList);
         view_model.isFirstTime().observe(this, this::displayFirstTimeNoConnection);
+        view_model.isRefreshing().observe(this, this::displayRefreshing);
 
         ln_last_update = findViewById(R.id.ln_last_update);
         txv_last_update = findViewById(R.id.txv_last_update);
@@ -48,11 +50,10 @@ public class MainActivity extends TMDMActivity {
 
         setLastUpdate();
 
-        SwipeRefreshLayout pullToRefresh = findViewById(R.id.srl_refresh);
+        pullToRefresh = findViewById(R.id.srl_refresh);
         pullToRefresh.setOnRefreshListener(() -> {
             view_model.getAllMoviesOnline();
             setLastUpdate();
-            pullToRefresh.setRefreshing(false);
         });
     }
 
@@ -87,5 +88,10 @@ public class MainActivity extends TMDMActivity {
             txv_empty_list.setText(R.string.no_connection);
         else
             txv_empty_list.setText("");
+    }
+
+    public void displayRefreshing(boolean refreshing) {
+        if (!refreshing)
+            pullToRefresh.setRefreshing(false);
     }
 }

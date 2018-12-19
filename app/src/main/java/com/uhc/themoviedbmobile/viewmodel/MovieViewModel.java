@@ -1,6 +1,5 @@
 package com.uhc.themoviedbmobile.viewmodel;
 
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
@@ -18,9 +17,7 @@ import com.uhc.themoviedbmobile.model.MovieModel;
 import com.uhc.themoviedbmobile.utils.TMDMUtils;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -114,9 +111,7 @@ public class MovieViewModel extends ViewModel {
     }
 
     private void setLastUpdateNow() {
-        @SuppressLint("SimpleDateFormat") String date_time = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(Calendar.getInstance().getTime());
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(weak_ctx.get());
-        prefs.edit().putString(weak_ctx.get().getString(R.string.pref_key_last_update), date_time).apply();
+        prefs.edit().putString(weak_ctx.get().getString(R.string.pref_key_last_update), TMDMUtils.getCurrentDateTime()).apply();
     }
 }

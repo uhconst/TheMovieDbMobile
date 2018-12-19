@@ -1,6 +1,7 @@
 package com.uhc.themoviedbmobile.viewmodel;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
@@ -33,7 +34,9 @@ public class MovieViewModel extends ViewModel {
     private final static boolean PLACEHOLDERS = true;
     private final DataRepository mRepository;
     private final MovieAPI mAPI;
+    private MutableLiveData<Boolean> first_time = new MutableLiveData<>();
     private WeakReference<Context> weak_ctx;
+    private SharedPreferences prefs;
 
     public MovieViewModel(DataRepository repository) {
         mRepository = repository;
@@ -43,6 +46,7 @@ public class MovieViewModel extends ViewModel {
     @SuppressWarnings("unchecked")
     public LiveData<PagedList<MovieModel>> getAllMovies(Context ctx) {
         this.weak_ctx = new WeakReference<>(ctx);
+        prefs = PreferenceManager.getDefaultSharedPreferences(weak_ctx.get());
 
         getAllMoviesOnline();
 
@@ -68,6 +72,8 @@ public class MovieViewModel extends ViewModel {
                     public void onResponse(Call<ArrayList<MovieModel>> call, Response<ArrayList<MovieModel>> response) {
                         if (response.isSuccessful()) {
                             ArrayList<MovieModel> movies = response.body();
+                            prefs.edit().putBoolean(weak_ctx.get().getString(R.string.pref_key_first_time), false).apply();
+                            first_time.setValue(false);
 
                             // Inative all movies before inserting/updating
                             mRepository.inativeAll();
@@ -102,6 +108,7 @@ public class MovieViewModel extends ViewModel {
             }
 
         } else {
+            first_time.setValue(prefs.getBoolean(weak_ctx.get().getString(R.string.pref_key_first_time), true));
             Log.d("getAllMoviesOnline", "No connection.");
         }
     }
@@ -109,13 +116,14 @@ public class MovieViewModel extends ViewModel {
     public String getLastUpdate() {
         if (TMDMUtils.isNetworkAvailable(weak_ctx.get()))
             return "";
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(weak_ctx.get());
         return prefs.getString(weak_ctx.get().getString(R.string.pref_key_last_update), "");
     }
 
     private void setLastUpdateNow() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(weak_ctx.get());
         prefs.edit().putString(weak_ctx.get().getString(R.string.pref_key_last_update), TMDMUtils.getCurrentDateTime()).apply();
+    }
+
+    public MutableLiveData<Boolean> isFirstTime() {
+        return first_time;
     }
 }

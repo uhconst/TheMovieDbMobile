@@ -2,6 +2,7 @@
     <string name="app_name">The Movie Db Mobile</string>
 
     <!-- Prefs -->
+    <string name="pref_key_first_time" translatable="false">pref_key_first_time</string>
     <string name="pref_key_last_update" translatable="false">pref_key_last_update</string>
     <string name="pref_key_limit" translatable="false">pref_key_limit</string>
     <string name="pref_limit_title">Movie limit</string>
@@ -10,4 +11,6 @@
 
     <!-- Transitions -->
     <string name="poster_transition">poster_transition</string>
+
+    <string name="no_connection">No connection</string>
 </resources>

@@ -41,8 +41,8 @@ public class MovieDetailsActivity extends TMDMActivity {
 
         int id = getIntent().getIntExtra("id", 0);
 
-        ViewModelFactory viewModelFactory = ViewModelFactory.createFactory(this);
-        movie_details_view_model = ViewModelProviders.of(this, viewModelFactory).get(MovieDetailsViewModel.class);
+        ViewModelFactory view_model_factory = ViewModelFactory.createFactory(this);
+        movie_details_view_model = ViewModelProviders.of(this, view_model_factory).get(MovieDetailsViewModel.class);
 
         imv_poster = findViewById(R.id.txv_details_poster);
         txv_title = findViewById(R.id.txv_details_title);
@@ -90,5 +90,12 @@ public class MovieDetailsActivity extends TMDMActivity {
 
         toast_message = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         toast_message.show();
+    }
+
+    // Wait transition before finish activity
+    @Override
+    public boolean onSupportNavigateUp() {
+        finishAfterTransition();
+        return true;
     }
 }

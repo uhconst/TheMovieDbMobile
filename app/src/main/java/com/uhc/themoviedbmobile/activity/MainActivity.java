@@ -22,20 +22,23 @@ public class MainActivity extends TMDMActivity {
     private MovieViewModel view_model;
     private LinearLayout ln_last_update;
     private TextView txv_last_update;
+    private TextView txv_empty_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ViewModelFactory viewModelFactory = ViewModelFactory.createFactory(this);
-        view_model = ViewModelProviders.of(this, viewModelFactory).get(MovieViewModel.class);
+        ViewModelFactory view_model_factory = ViewModelFactory.createFactory(this);
+        view_model = ViewModelProviders.of(this, view_model_factory).get(MovieViewModel.class);
 
         MovieAdapter adapter = new MovieAdapter(this);
         view_model.getAllMovies(this).observe(this, adapter::submitList);
+        view_model.isFirstTime().observe(this, this::displayFirstTimeNoConnection);
 
         ln_last_update = findViewById(R.id.ln_last_update);
         txv_last_update = findViewById(R.id.txv_last_update);
+        txv_empty_list = findViewById(R.id.txv_empty_list);
 
         RecyclerView rv = findViewById(R.id.rv_movies);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -77,5 +80,12 @@ public class MainActivity extends TMDMActivity {
         String last_update = view_model.getLastUpdate();
         txv_last_update.setText(last_update);
         ln_last_update.setVisibility(last_update.isEmpty() ? View.GONE : View.VISIBLE);
+    }
+
+    private void displayFirstTimeNoConnection(boolean no_connection) {
+        if (no_connection)
+            txv_empty_list.setText(R.string.no_connection);
+        else
+            txv_empty_list.setText("");
     }
 }

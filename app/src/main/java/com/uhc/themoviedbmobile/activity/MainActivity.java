@@ -82,7 +82,7 @@ public class MainActivity extends TMDMActivity {
         ln_last_update.setVisibility(last_update.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
-    private void displayFirstTimeNoConnection(boolean no_connection) {
+    public void displayFirstTimeNoConnection(boolean no_connection) {
         if (no_connection)
             txv_empty_list.setText(R.string.no_connection);
         else

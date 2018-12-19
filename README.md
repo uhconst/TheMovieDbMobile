@@ -37,6 +37,7 @@ Android application to browse the top 50 movies in popularity descending order, 
 - Smooth Transition between Movies List and Movie Details page
 - Unit tests
 - Instrumentation tests
+- Show "No Connection" text when the movies' database is empty and there is no connection
 - Using different sizes for larger devices on dimens and dimens-large
 - Using styles resource for components with same attributes
 - Project hosted on [GitHub](https://github.com/uhconst/TheMovieDbMobile.git)

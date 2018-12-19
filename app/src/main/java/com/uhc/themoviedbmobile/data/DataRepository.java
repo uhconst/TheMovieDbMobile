@@ -66,7 +66,7 @@ public class DataRepository {
     }
 
     public void inativeAll() {
-        mIoExecutor.execute(() -> mDao.inativeAll());
+        mIoExecutor.execute(mDao::inativeAll);
     }
 
     public void updateMovieFavorite(int id, boolean favorite) {

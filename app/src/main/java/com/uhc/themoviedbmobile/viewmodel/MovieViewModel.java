@@ -8,6 +8,7 @@ import android.arch.paging.PagedList;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.uhc.themoviedbmobile.R;
@@ -32,15 +33,16 @@ public class MovieViewModel extends ViewModel {
     private final static int TOTAL_PAGES = 3;
     private final static String DEFAULT_MOVIE_LIMIT = "50";
     private final static boolean PLACEHOLDERS = true;
-    private final DataRepository mRepository;
-    private final MovieAPI mAPI;
+    private final DataRepository repository;
+    private final MovieAPI movie_api;
     private MutableLiveData<Boolean> first_time = new MutableLiveData<>();
     private WeakReference<Context> weak_ctx;
     private SharedPreferences prefs;
+    private boolean inative_all;
 
     public MovieViewModel(DataRepository repository) {
-        mRepository = repository;
-        mAPI = APIClient.getClient(APIClient.TMDM_URL + APIClient.DIR_POPULAR);
+        this.repository = repository;
+        movie_api = APIClient.getClient(APIClient.TMDM_URL + APIClient.DIR_POPULAR);
     }
 
     @SuppressWarnings("unchecked")
@@ -56,7 +58,7 @@ public class MovieViewModel extends ViewModel {
         if (pref_limit != null)
             movie_limit = Integer.parseInt(pref_limit);
 
-        return new LivePagedListBuilder<>(mRepository.getMovies(movie_limit), new PagedList.Config.Builder()
+        return new LivePagedListBuilder<>(repository.getMovies(movie_limit), new PagedList.Config.Builder()
                 .setPageSize(PAGE_SIZE)
                 .setEnablePlaceholders(PLACEHOLDERS)
                 .build()).build();
@@ -65,24 +67,27 @@ public class MovieViewModel extends ViewModel {
     public void getAllMoviesOnline() {
         if (TMDMUtils.isNetworkAvailable(weak_ctx.get())) {
             for (int page = 1; page <= TOTAL_PAGES; page++) {
-                Call<ArrayList<MovieModel>> callBack = mAPI.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
+                Call<ArrayList<MovieModel>> callBack = movie_api.getMovies(APIClient.API_KEY_VALUE, APIClient.LANGUAGE, page);
                 callBack.enqueue(new Callback<ArrayList<MovieModel>>() {
                     @Override
-                    public void onResponse(Call<ArrayList<MovieModel>> call, Response<ArrayList<MovieModel>> response) {
+                    public void onResponse(@NonNull Call<ArrayList<MovieModel>> call, @NonNull Response<ArrayList<MovieModel>> response) {
                         if (response.isSuccessful()) {
                             ArrayList<MovieModel> movies = response.body();
                             prefs.edit().putBoolean(weak_ctx.get().getString(R.string.pref_key_first_time), false).apply();
                             first_time.setValue(false);
 
                             // Inative all movies before inserting/updating
-                            mRepository.inativeAll();
+                            if (!inative_all) {
+                                repository.inativeAll();
+                                inative_all = true;
+                            }
 
                             if (movies != null) {
                                 for (MovieModel movie : movies) {
-                                    boolean isFavorite = mRepository.isMovieFavorite(movie.getId());
+                                    boolean isFavorite = repository.isMovieFavorite(movie.getId());
                                     movie.setFavorite(isFavorite);
                                     movie.setAtivo(true);
-                                    mRepository.insert(movie);
+                                    repository.insert(movie);
                                 }
                             }
 

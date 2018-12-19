@@ -17,7 +17,7 @@ Android application to browse the top 50 movies in popularity descending order, 
 - [Gson](https://github.com/google/gson)
 - [Justified TextView and EditText](https://github.com/programingjd/justified)
 
-## TheMovieDbMobile pages
+## TheMovieDbMobile Screens
 - Movie list 
 - Movie details 
 - Settings

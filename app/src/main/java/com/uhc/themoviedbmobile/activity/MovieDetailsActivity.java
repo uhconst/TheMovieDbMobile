@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import com.uhc.themoviedbmobile.R;
 import com.uhc.themoviedbmobile.api.APIClient;
 import com.uhc.themoviedbmobile.model.MovieModel;
+import com.uhc.themoviedbmobile.utils.TMDMUtils;
 import com.uhc.themoviedbmobile.viewmodel.MovieDetailsViewModel;
 import com.uhc.themoviedbmobile.viewmodel.ViewModelFactory;
 
@@ -74,7 +75,7 @@ public class MovieDetailsActivity extends TMDMActivity {
         imv_favorite.setImageResource(movie.isFavorite() ? R.drawable.icon_favorite : R.drawable.icon_not_favorite);
         imv_favorite.setColorFilter(ContextCompat.getColor(this, R.color.favorite_star_color));
         txv_title.setText(movie.getTitle());
-        txv_release_date.setText(movie.getRelease_date());
+        txv_release_date.setText(TMDMUtils.formatDate(movie.getRelease_date()));
         txv_popularity.setText(String.valueOf(movie.getPopularity()));
         txv_vote_average.setText(String.valueOf(movie.getVote_average()));
         txv_vote_count.setText(String.valueOf(movie.getVote_count()));

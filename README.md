@@ -47,6 +47,7 @@ Android application to browse the top 50 movies in popularity descending order, 
 across app restarts, kill or catalog refresh
 - **[DONE]** Feature: Work offline. Ability to download content and use it while offline. We love offline!
 - **[DONE]** Feature: Infinite scroll / Lazy load of more items.
+- **[DONE]** Feature: Add more filtering/sorting options 
 - **[DONE]** Transition: The ability to provide smooth transitions between screens and states
 
 ## Developed by

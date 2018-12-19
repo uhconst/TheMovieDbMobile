@@ -69,10 +69,14 @@ public class MovieViewModel extends ViewModel {
                         if (response.isSuccessful()) {
                             ArrayList<MovieModel> movies = response.body();
 
+                            // Inative all movies before inserting/updating
+                            mRepository.inativeAll();
+
                             if (movies != null) {
                                 for (MovieModel movie : movies) {
                                     boolean isFavorite = mRepository.isMovieFavorite(movie.getId());
                                     movie.setFavorite(isFavorite);
+                                    movie.setAtivo(true);
                                     mRepository.insert(movie);
                                 }
                             }

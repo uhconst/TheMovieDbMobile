@@ -19,4 +19,5 @@ public final class DataMovieName {
     public static final String COL_VIDEO = "video";
     public static final String COL_VOTE_AVERAGE = "vote_average";
     public static final String COL_FAVORITE = "favorite";
+    public static final String COL_ATIVO = "ativo";
 }

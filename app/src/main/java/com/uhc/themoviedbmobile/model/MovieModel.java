@@ -63,6 +63,9 @@ public class MovieModel {
     @ColumnInfo(name = DataMovieName.COL_FAVORITE)
     private boolean favorite;
 
+    @ColumnInfo(name = DataMovieName.COL_ATIVO)
+    private boolean ativo;
+
     public int getId() {
         return id;
     }
@@ -173,5 +176,13 @@ public class MovieModel {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

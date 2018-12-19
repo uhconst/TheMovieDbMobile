@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "10f08e28d25eb210490049c9ba16a841",
+    "identityHash": "90b2b3845dfce8867786faac443e977d",
     "entities": [
       {
         "tableName": "tb_movie",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `poster_path` TEXT, `adult` INTEGER NOT NULL, `overview` TEXT, `release_date` TEXT, `original_title` TEXT, `original_language` TEXT, `title` TEXT, `backdrop_path` TEXT, `popularity` REAL NOT NULL, `vote_count` INTEGER NOT NULL, `video` INTEGER NOT NULL, `vote_average` REAL NOT NULL, `favorite` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `poster_path` TEXT, `adult` INTEGER NOT NULL, `overview` TEXT, `release_date` TEXT, `original_title` TEXT, `original_language` TEXT, `title` TEXT, `backdrop_path` TEXT, `popularity` REAL NOT NULL, `vote_count` INTEGER NOT NULL, `video` INTEGER NOT NULL, `vote_average` REAL NOT NULL, `favorite` INTEGER NOT NULL, `ativo` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -91,6 +91,12 @@
             "columnName": "favorite",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "ativo",
+            "columnName": "ativo",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -105,7 +111,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"10f08e28d25eb210490049c9ba16a841\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"90b2b3845dfce8867786faac443e977d\")"
     ]
   }
 }

@@ -3,14 +3,11 @@ package com.uhc.themoviedbmobile.data;
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.DataSource;
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.uhc.themoviedbmobile.model.MovieModel;
-
-import java.util.ArrayList;
 
 /**
  * Created by const on 12/12/18.
@@ -20,7 +17,7 @@ public interface MovieDao {
     /**
      * Returns all data in table for Paging.
      */
-    @Query("SELECT * FROM " + DataMovieName.TABLE_NAME + " ORDER BY " + DataMovieName.COL_POPULARITY + " DESC")
+    @Query("SELECT * FROM " + DataMovieName.TABLE_NAME + " WHERE " + DataMovieName.COL_ATIVO + " = 1 ORDER BY " + DataMovieName.COL_POPULARITY + " DESC")
     DataSource.Factory<Integer, MovieModel> getAll();
 
     /**
@@ -44,14 +41,11 @@ public interface MovieDao {
     @Query("SELECT favorite FROM " + DataMovieName.TABLE_NAME + " WHERE " + DataMovieName.COL_ID + " = :id")
     boolean isMovieFavorite(int id);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(ArrayList<MovieModel> movie);
+    @Query("UPDATE " + DataMovieName.TABLE_NAME + " SET " + DataMovieName.COL_ATIVO + " = 0")
+    void inativeAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(MovieModel movie);
-
-    @Delete
-    void delete(MovieModel movie);
 
     @Query("UPDATE " + DataMovieName.TABLE_NAME +
             " SET " + DataMovieName.COL_FAVORITE + " = :favorite" +

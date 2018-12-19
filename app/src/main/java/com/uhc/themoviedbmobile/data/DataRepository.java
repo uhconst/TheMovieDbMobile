@@ -6,7 +6,6 @@ import android.arch.paging.DataSource;
 
 import com.uhc.themoviedbmobile.model.MovieModel;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -66,8 +65,8 @@ public class DataRepository {
         mIoExecutor.execute(() -> mDao.insert(movie));
     }
 
-    public void insertAll(ArrayList<MovieModel> movie) {
-        mIoExecutor.execute(() -> mDao.insertAll(movie));
+    public void inativeAll() {
+        mIoExecutor.execute(() -> mDao.inativeAll());
     }
 
     public void updateMovieFavorite(int id, boolean favorite) {

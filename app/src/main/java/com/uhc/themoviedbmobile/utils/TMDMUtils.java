@@ -21,12 +21,16 @@ public class TMDMUtils {
     }
 
     public static String formatDate(String data) {
-        if (data != null && data.contains("-"))
+        if (data == null)
+            return "";
+
+        if (data.contains("-")) {
             try {
                 return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(data));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+        }
 
         return data;
     }
